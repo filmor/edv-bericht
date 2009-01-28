@@ -1,0 +1,80 @@
+\section{Aufgabe 3}
+\subsection{Analyse von Pipelines}
+Zu betrachten ist die Pipeline:
+% TODO pgf
+\lstset{language=Bash}
+\begin{lstlisting}[style=Bash]
+cat tr33_emails.txt tr33_emails2.txt | tr '<>' '\n' | grep '@' | sort | uniq -i
+\end{lstlisting}
+\begin{enumerate}
+    \item Im ersten Teil werden die beiden Dateien aneinandergef\"ugt und in die
+        Standardausgabe ausgegeben
+    \item Im zweiten Teil werden alle Gr\"o\ss{}er- und Kleinerzeichen durch
+        Zeilenumbr\"uche (\lstinline'\n') ersetzt
+    \item Daraus werden nun alle Zeilen herausgeholt, die ein @-Zeichen
+        enthalten \ldots
+    \item \ldots, die als n\"achstes sortiert werden.
+    \item Zuletzt werden dann mehrfach vorkommende Zeilen, also Email-Adressen
+        (unabh\"angig von Gro\ss{}- und Kleinschreibung) entfernt.
+\end{enumerate}
+
+\begin{lstlisting}[style=Bash]
+find . -type d -exec du -b {} \;| sort -n -r | head -n 10
+\end{lstlisting}
+\begin{enumerate}
+    \item Das \lstinline'find'-Programm sammelt immer eine Liste von
+        Verzeichniseintr\"agen (hier aus dem aktuellen Verzeichnis) und f\"uhrt
+        bei Angabe des \lstinline'exec'-Parameters auf diesen etwas aus oder gibt sie
+        einfach in die Standardausgabe (explizit mit \lstinline'-print'). Der
+        Parameter \lstinline'-type d' sorgt hier daf\"ur, dass die Liste nur
+        Verzeichnisse (\emph{\textbf{d}irectories}) ent\"alt.
+    \item Jeder einzelne dieser Verzeichniseintr\"age wird dann \lstinline'du'
+        als Parameter \"ubergeben, welches uns dann die Gr\"o\ss{}e des
+        Verzeichnisses und all seiner Untereintr\"age (egal ob Datei oder
+        Verzeichnis) ausgibt (das \lstinline'-b' sorgt daf\"ur, dass die
+        Gr\"o\ss{}e in Bytes angegeben wird, nicht die tats\"achliche
+        Gr\"o\ss{}e auf dem Datentr\"ager). In dieser Form ist der Aufruf
+        ziemlich sinnlos, vermutlich sollte auch der Parameter \lstinline'-s' an
+        \lstinline'du' \"ubergeben werden, der nicht weiter durch den Dateibaum
+        l\"auft (was ja eigentlich \lstinline'find' bereits erledigt).
+    \item Die Daten werden dann numerisch (\lstinline'-n') umgekehrt
+        (\lstinline'-r') sortiert. Durch ersteres werden die Zahlen auch als
+        solche aufgefasst, lexikographisch w\"are n\"amlich $100 < 10$,
+        letzteres sorgt daf\"ur, dass die gr\"o\ss{}ten Eintr\"age in der Liste
+        oben stehen.
+    \item Zuletzt nehmen wir uns von unserem Datensatz die ersten 10 Zeilen, wir
+        erhalten also (mit der vorgeschlagenen \"Anderung) die 10
+        gr\"o\ss{}ten Verzeichniseintr\"age im aktuellen Arbeitsverzeichnis,
+        wobei trivialerweise der erste Eintrag immer \verb'.' ist.
+\end{enumerate}
+Sinnvoll w\"aren hier noch der Parameter \lstinline'-S' f\"ur \lstinline'du'.
+
+\subsection{Zugriffsrechte}
+Sieht man komplett von der Existenz von ACLs, Sticky- und Setuid-Bits etc.\ ab,
+so gibt es unter Linux (wie unter allen anderen Unices auch) f\"ur jeden
+Verzeichniseintrag die Zugriffsrechte \emph{Lesen} (\textbf Read),
+\emph{Schreiben} (\textbf Write) und \emph{Ausf\"uhren} (e\textbf{X}ecute),
+jeweils einzeln definiert f\"ur den Eigent\"umer (\textbf User), die Gruppe
+(\textbf Group) und alle Anderen (\textbf Others).
+
+F\"ur Dateien sind die beiden ersten Zugriffsrechte klar, das
+Ausf\"uhrbarkeitsbit regelt, ob eine Shell die Datei (implizit) ausf\"uhren
+kann. Das ist besonders f\"ur Bin\"ardateien relevant, da diese im Gegensatz zu
+Skripten nicht anders ausge\"uhrt werden k\"onnen.
+
+F\"ur Verzeichnisse regelt Lese- und Schreibbit, ob in das Verzeichnis selber
+geschrieben oder daraus gelesen werden darf. Schreiben hei\ss{}t in diesem Fall
+Dateien oder Verzeichnisse anlegen oder l\"oschen, das ver\"andern bereits
+existierender Dateien wird durch deren Zugriffsrechte geregelt. Lesen ist analog
+dazu den Verzeichnisinhalt auszulesen (also letztlich, ob \lstinline'ls'
+funktioniert oder nicht). Das Ausf\"uhrbarkeitsbit regelt, ob auf das
+Verzeichnis zugegriffen werden kann, also ob man in das Verzeichnis mit
+\lstinline'cd' wechseln kann. % Vererbung
+
+\begin{lstlisting}[style=Bash]
+$ ls -ld hausaufgaben{,/*}
+drwxr-xr-- 2 sauer physik131 [...] hausaufgaben
+-rw-r--r-- 1 sauer physik131 [...] hausaufgaben/analysis.txt
+-rw-r-xr-- 1 sauer physik131 [...] hausaufgaben/getmean
+\end{lstlisting}
+

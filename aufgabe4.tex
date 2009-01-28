@@ -1,0 +1,41 @@
+\section{Aufgabe 4}
+\subsection{Kontrollfragen}
+
+\begin{description}
+    \item[Was ist der Unterschied zwischen den Befehlen:
+        \lstinline'cd ~lehnertz' und \lstinline'cd ~/lehnertz']
+        Ersteres versucht in das Verzeichnis des Benutzers \verb'lehnertz' zu
+        wechseln, letzteres versucht dasselbe mit dem Verzeichnis
+        \verb'lehnertz' im eigenen Benutzerverzeichnis.
+    \item[Sie befinden sich im ihrem Homeverzeichnis. Was ist der Unterschied
+        zwischen den Befehlen: \lstinline'rm -rf ./uebung/*' und \lstinline'rm
+        -rf ./uebung/ *']
+        Ersteres l\"oscht rekursiv alle Verzeichniseintr\"age unterhalb von
+        \verb'./uebung', letzteres l\"oscht zus\"atzlich dazu auch noch das
+        Verzeichnis selber und alle nicht-versteckten Dateien im aktuellen
+        Verzeichnis.
+    \item[Angenommen der Systemverwalter hat sich einen Spass erlaubt und das ls
+        Kommando gel\"oscht. Wie k\"onnen Sie trotzdem eine Liste der Dateien im
+        gegenw\"artigen Verzeichnis bekommen?]
+        Zum Beispiel mit \lstinline'find . -mindepth 1 -maxdepth 1'.
+    \item[Sie haben ein Verzeichnis \lstinline'${HOME}/uebung' und befinden sich in
+        \lstinline'${HOME}'.  Was geschieht bei folgenden Befehlen: \dots]
+        \begin{enumerate}
+            \item Kopiert die Datei \verb'frage.txt' aus dem Verzeichnis
+                \verb'uebung' im Benutzerverzeichnis von \verb'lehnertz' nach
+                \verb'uebung' im eigenen Benutzerverzeichnis. Existiert ein
+                Verzeichnis mit dem Namen, so wird die Datei in diesem abgelegt
+                als \verb'frage.txt', abgelegt, ansonsten wird sie einfach unter
+                dem Namen \verb'uebung' gespeichert.
+            \item Dasselbe wie zuvor, allerdings wird hier eine Fehlermeldung
+                ausgegeben, falls \verb'uebung' kein Verzeichnis ist.
+            \item Kopiert alle Dateien aus dem Verzeichnis
+                \verb'~lehnertz/uebung' nach \verb'uebung'. Ist letzteres kein
+                Verzeichnis wird eine Fehlermeldung ausgegeben.
+            \item Dasselbe wie zuvor (m\"oglicherweise mit etwas anders
+                lautender Fehlermeldung, der Effekt ist derselbe).
+        \end{enumerate}
+    \item[Wozu dient die \lstinline'PATH' Variable? Sie geben unvorsichtigerweise
+        \lstinline'PATH=' ein. Was funktioniert danach nicht mehr?]
+        Nix.
+\end{description}

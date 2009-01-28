@@ -1,0 +1,23 @@
+\documentclass[a4paper]{scrartcl}
+
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{tikz}
+
+\lstdefinestyle{Bash}
+{ language=Bash,
+showstringspaces=false,
+numbers=none,
+captionpos=b,
+tabsize=4,
+breaklines=true
+}
+
+\begin{document}
+\foreach \x in {1, ..., 4}
+{
+\input{aufgabe\x}
+}
+
+\end{document}
