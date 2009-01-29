@@ -78,3 +78,73 @@ drwxr-xr-- 2 sauer physik131 [...] hausaufgaben
 -rw-r-xr-- 1 sauer physik131 [...] hausaufgaben/getmean
 \end{lstlisting}
 
+\subsection{Kontrollfragen}
+
+\subsubsection*{Was ist der Unterschied zwischen den Befehlen: \lstinline'cd
+~lehnertz' und \lstinline'cd ~/lehnertz'}
+Ersteres versucht in das Verzeichnis des Benutzers \verb'lehnertz' zu wechseln,
+letzteres versucht dasselbe mit dem Verzeichnis \verb'lehnertz' im eigenen
+Benutzerverzeichnis.
+
+\subsubsection*{Sie befinden sich im ihrem Homeverzeichnis. Was ist der
+Unterschied zwischen den Befehlen: \lstinline'rm -rf ./uebung/*' und
+\lstinline'rm -rf ./uebung/ *'}
+Ersteres l\"oscht rekursiv alle Verzeichniseintr\"age unterhalb von
+\verb'./uebung', letzteres l\"oscht zus\"atzlich dazu auch noch das Verzeichnis
+selber und alle nicht-versteckten Dateien im aktuellen Verzeichnis.
+
+\subsubsection*{Angenommen der Systemverwalter hat sich einen Spass erlaubt und
+das ls Kommando gel\"oscht. Wie k\"onnen Sie trotzdem eine Liste der Dateien im
+gegenw\"artigen Verzeichnis bekommen?}
+Zum Beispiel mit \lstinline'find . -mindepth 1 -maxdepth 1'.
+
+\subsubsection*{Sie haben ein Verzeichnis \$\{HOME\}/uebung und befinden sich in
+\$\{HOME\}.  Was geschieht bei folgenden Befehlen: \dots}
+\begin{enumerate}
+    \item Kopiert die Datei \verb'frage.txt' aus dem Verzeichnis
+        \verb'uebung' im Benutzerverzeichnis von \verb'lehnertz' nach
+        \verb'uebung' im eigenen Benutzerverzeichnis. Existiert ein
+        Verzeichnis mit dem Namen, so wird die Datei in diesem abgelegt
+        als \verb'frage.txt', abgelegt, ansonsten wird sie einfach unter
+        dem Namen \verb'uebung' gespeichert.
+    \item Dasselbe wie zuvor, allerdings wird hier eine Fehlermeldung
+        ausgegeben, falls \verb'uebung' kein Verzeichnis ist.
+    \item Kopiert alle Dateien aus dem Verzeichnis
+        \verb'~lehnertz/uebung' nach \verb'uebung'. Ist letzteres kein
+        Verzeichnis wird eine Fehlermeldung ausgegeben.
+    \item Dasselbe wie zuvor (m\"oglicherweise mit etwas anders
+        lautender Fehlermeldung, der Effekt ist derselbe).
+\end{enumerate}
+
+\subsubsection*{Wozu dient die \lstinline'PATH' Variable? Sie geben
+unvorsichtigerweise \lstinline'PATH=' ein. Was funktioniert danach nicht mehr?}
+Die Umgebungsvariable \lstinline'PATH' enthält eine durch Doppelpunkte getrennte
+Liste von Pfaden, die die Shell nach ausführbaren Dateien durchsucht, wenn bei
+der Eingabe kein Pfad explizit angegeben wurde. Insbesondere wird auf
+Unix-Systemen im Allgemeinen \emph{nicht} das aktuelle Verzeichnis durchsucht.
+
+Die Eingabe von obigen bewirkt in den meisten Shells (insbesondere sh (der
+Ur-Shell, nicht der Symlink), (t)csh, zsh und bash) genau nichts. Lediglich in
+der Korn Shell wird (wie die Aufgabe vermutlich gedacht war) die Variable
+überschrieben, so dass nicht mehr auf die Programme in Pfaden wie \verb'/bin'
+oder ähnliches zugegriffen wird. Lediglich die fest in die Shell eingebauten
+Kommandos (bei der bash zum Beispiel \verb'cd', bei Busybox dagegen praktisch
+alles, auch \verb'ls') bleiben implizit ausführbar, also ohne Angabe des
+gesamten Pfades.
+
+
+\subsubsection*{Geben Sie eine Kommandofolge an (Pipes!), mit der Sie eine
+alphabetisch sortierte Liste aller am System angemeldeten Benutzer bekommen.
+Jeder Name soll in Ihrer Liste nur einmal vorkommen.}
+\begin{lstlisting}
+who | awk '{ print $1 }' | sort | uniq
+\end{lstlisting}
+
+\subsubsection*{Sie wollen die drei größten Dateien in dem Verzeichnisbaum
+startend von Ihrem Homeverzeichnis wissen. Geben Sie eine Befehlsfolge die dies
+leistet}
+\begin{lstlisting}
+find ~ -type f -exec du {} \; | sort -nr | head -n3
+\end{lstlisting}
+
+
