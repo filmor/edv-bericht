@@ -147,4 +147,45 @@ leistet}
 find ~ -type f -exec du {} \; | sort -nr | head -n3
 \end{lstlisting}
 
+\subsubsection*{Sie wollen den gesamten Verzeichnisbaum unter Ihrem
+Homeverzeichnis in einer tar Datei archivieren und mit gzip packen. Die Datei
+soll als Backup in den jeweils anderen CIP-Pool ubertragen werden. Geben Sie die
+nötigen Befehle hierzu.}
+\begin{lstlisting}
+tar -czpf backup.tar.gz ~
+scp backup.tar.gz cipserv1.astro.uni-bonn.de:
+\end{lstlisting}
+
+\subsection{Spreadsheets und Diagramme}
+
+\begin{figure}[h!]
+  \begin{center}
+%    \includegraphics{}
+  \end{center}
+%  \caption{}
+%  \label{fig:}
+\end{figure}
+
+\subsection{Graphische Überlagerung von $\sin$ und $\cos$}
+
+\subsection{Auswertung einer Messreihe}
+
+\begin{lstlisting}
+plot 'auto_daten.txt' u 1:2:3 w yerrorbars
+
+s(t) = s_0 + v_1 * t + 1/2 * a_1 * t^2
+
+fit s(t) via s_0, v_1, a_1 u 'auto_daten.txt' u 1:2:3
+plot 'auto_daten.txt' u 1:2:3 w yerrorbars, s(t)
+
+plot 'auto_daten.txt' u 1:4:5 w yerrorbars
+
+v(t) = v_2 + a_2 * t
+fit v(t) via v_2, a_2 u 'auto_daten.txt' 1:4:5
+
+print a_1, ' ', a_2
+print v_1, ' ', v_2
+\end{lstlisting}
+
+\subsection{Verarbeitung größerer Datenmengen}
 

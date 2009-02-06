@@ -1,0 +1,15 @@
+plot 'auto_daten.txt' u 1:2:3 w yerrorbars
+
+s(t) = s_0 + v_1 * t + 0.5 * a_1 * t**2
+fit s(x) 'auto_daten.txt' u 1:2:3 via s_0, v_1, a_1
+
+plot 'auto_daten.txt' u 1:2:3 w yerrorbars, s(x)
+
+plot 'auto_daten.txt' u 1:4:5 w yerrorbars
+
+v(t) = v_2 + a_2 * t
+fit v(x) 'auto_daten.txt' u 1:4:5 via v_2, a_2
+
+print 'Beschleunigung:  ', a_1, ' ', a_2
+print 'Geschwindigkeit: ', v_1, '  ', v_2
+
