@@ -1,7 +1,0 @@
-ls      Listet ein Verzeichnis auf
-pwd     Gibt das Arbeitsverzeichnis aus
-mkdir   Erstellt ein Verzeichnis
-rmdir   Loescht ein leeres Verzeichnis
-cp      Kopiert Dateien
-mv      Verschiebt Dateien
-rm      Löscht Dateien
