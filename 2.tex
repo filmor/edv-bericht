@@ -1,7 +1,6 @@
-\section{Aufgabe 3}
+\section{Unix-Pipelines, -Zugriffsrechte und Befehle}
 \subsection{Analyse von Pipelines}
 Zu betrachten ist die Pipeline:
-% TODO pgf
 \lstset{language=Bash}
 \begin{lstlisting}[style=Bash]
 cat tr33_emails.txt tr33_emails2.txt | tr '<>' '\n' | grep '@' | sort | uniq -i
@@ -136,56 +135,30 @@ gesamten Pfades.
 \subsubsection*{Geben Sie eine Kommandofolge an (Pipes!), mit der Sie eine
 alphabetisch sortierte Liste aller am System angemeldeten Benutzer bekommen.
 Jeder Name soll in Ihrer Liste nur einmal vorkommen.}
-\begin{lstlisting}
+\begin{lstlisting}[style=Bash]
 who | awk '{ print $1 }' | sort | uniq
 \end{lstlisting}
 
 \subsubsection*{Sie wollen die drei größten Dateien in dem Verzeichnisbaum
 startend von Ihrem Homeverzeichnis wissen. Geben Sie eine Befehlsfolge die dies
 leistet}
-\begin{lstlisting}
+\begin{lstlisting}[style=Bash]
 find ~ -type f -exec du {} \; | sort -nr | head -n3
 \end{lstlisting}
+Der \lstinline'find'-Aufruf liefert zunächst eine Liste aller Dateien mit ihren
+Größen, diese wird dann numerisch und in umgekehrter Reihenfolge sortiert und
+zuletzt davon die oberen drei Einträge ausgegeben.
 
 \subsubsection*{Sie wollen den gesamten Verzeichnisbaum unter Ihrem
 Homeverzeichnis in einer tar Datei archivieren und mit gzip packen. Die Datei
 soll als Backup in den jeweils anderen CIP-Pool ubertragen werden. Geben Sie die
 nötigen Befehle hierzu.}
-\begin{lstlisting}
+\begin{lstlisting}[style=Bash]
 tar -czpf backup.tar.gz ~
 scp backup.tar.gz cipserv1.astro.uni-bonn.de:
 \end{lstlisting}
-
-\subsection{Spreadsheets und Diagramme}
-
-\begin{figure}[h!]
-  \begin{center}
-%    \includegraphics{}
-  \end{center}
-%  \caption{}
-%  \label{fig:}
-\end{figure}
-
-\subsection{Graphische Überlagerung von $\sin$ und $\cos$}
-
-\subsection{Auswertung einer Messreihe}
-
-\begin{lstlisting}
-plot 'auto_daten.txt' u 1:2:3 w yerrorbars
-
-s(t) = s_0 + v_1 * t + 1/2 * a_1 * t^2
-
-fit s(t) via s_0, v_1, a_1 u 'auto_daten.txt' u 1:2:3
-plot 'auto_daten.txt' u 1:2:3 w yerrorbars, s(t)
-
-plot 'auto_daten.txt' u 1:4:5 w yerrorbars
-
-v(t) = v_2 + a_2 * t
-fit v(t) via v_2, a_2 u 'auto_daten.txt' 1:4:5
-
-print a_1, ' ', a_2
-print v_1, ' ', v_2
-\end{lstlisting}
-
-\subsection{Verarbeitung größerer Datenmengen}
+Die Parameter von \lstinline'tar' bewirken dabei die Erstellung des neuen
+Archivs (\textbf create), das Komprimieren mit \lstinline'gzip' (\textbf z), das
+Bewahren der Zugriffsrechte (\textbf permissions) und zuletzt das Speichern in
+der Datei \lstinline'backup.tar.gz' (\textbf file).
 

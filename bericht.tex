@@ -1,9 +1,11 @@
-\documentclass[a4paper]{scrartcl}
-
+\documentclass[12pt,a4paper]{scrartcl}
 \usepackage[ngerman]{babel}
+\usepackage[scale=0.8]{geometry}
 \usepackage{amsmath}
 \usepackage{listings}
 \usepackage{tikz}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
 
 \lstdefinestyle{Bash}
 { language=Bash,
@@ -14,10 +16,24 @@ tabsize=4,
 breaklines=true
 }
 
-\begin{document}
-\foreach \x in {1, ..., 4}
-{
-\input{aufgabe\x}
-}
+% \newcommand[1]{\includesource}{\lstinputlisting{#1}}
 
+\title{Abschlussbericht zur Vorlesung \\ EDV für Physiker}
+\author{Benedikt Sauer}
+
+\begin{document}
+  \maketitle
+  \begin{abstract}
+    Was abstraktes.
+  \end{abstract}
+  \newpage
+  \tableofcontents
+  \newpage
+
+  \foreach \x in {1, ..., 6}
+  {
+    \input{\x.tex}
+  }
+
+  % Erklärung
 \end{document}
