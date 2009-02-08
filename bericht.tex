@@ -3,20 +3,26 @@
 \usepackage[scale=0.8]{geometry}
 \usepackage{amsmath}
 \usepackage{listings}
-\usepackage{tikz}
+\usepackage{units}
+\usepackage{pgffor}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 
-\lstdefinestyle{Bash}
-{ language=Bash,
-showstringspaces=false,
-numbers=none,
-captionpos=b,
-tabsize=4,
-breaklines=true
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+
+\lstset
+{
+  language=Bash,
+  showstringspaces=false,
+  captionpos=b,
+  tabsize=4,
+  breaklines=true
 }
 
-% \newcommand[1]{\includesource}{\lstinputlisting{#1}}
+\DeclareMathSymbol{,}{\mathpunct}{letters}{"3B}
+\DeclareMathSymbol{.}{\mathord}{letters}{"3B}
+\DeclareMathSymbol{\decimal}{\mathord}{letters}{"3A}
 
 \title{Abschlussbericht zur Vorlesung \\ EDV für Physiker}
 \author{Benedikt Sauer}
@@ -24,16 +30,24 @@ breaklines=true
 \begin{document}
   \maketitle
   \begin{abstract}
-    Was abstraktes.
+    Eigentlich gibt's nichts passendes für ein \lstinline'abstract' zu sagen,
+    aber hier soll halt was stehen.
   \end{abstract}
   \newpage
   \tableofcontents
   \newpage
 
-  \foreach \x in {1, ..., 6}
+  \foreach \x in {1, ..., 6, anhang}
   {
     \input{\x.tex}
   }
+  
+  \newpage
+  \section*{Erklärung}
+
+  \Large{Hiermit versichere ich, dass ich den vorliegenden Bericht selbstständig
+  angefertigt und nur die angegebenen Hilfsmittel benutzt habe.
+
 
   % Erklärung
 \end{document}

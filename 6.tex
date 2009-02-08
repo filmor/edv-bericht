@@ -3,12 +3,15 @@
 \begin{enumerate}
   \item Die bereinigte Datei entsteht am einfachsten durch mehrere
     hintereinander mit Pipes verbundene inverse reguläre Ausdrücke:
-    \begin{lstlisting}[style=Bash]
+    \begin{lstlisting}
 cat CFHTLS.log | grep -i Groth | grep -i 'E99 Zenith' | grep -i nan > CFHTLS_clean.log
     \end{lstlisting}
   \item Auch diese Aufgabe ist leicht aus der Kommandozeile heraus zu erledigen:
     \begin{lstlisting}
-for i in D{1..4}; do echo "$i: $(cat daten/CFHTLS.log | grep -c $i)"; done
+for i in D{1..4}
+do
+    echo "$i: $(cat daten/CFHTLS.log | grep -c $i)"
+done
     \end{lstlisting}
     Die Ausgabe des Codeschnipsels ist:
     \begin{verbatim}
@@ -23,11 +26,12 @@ D4: 2720
     \begin{enumerate}
       \item Die Statistik kann wiederum komplett aus der Kommandozeile erledigt
         werden, hierzu sind allerdings diesmal awk-Klimmzüge nötig:
-        \lstinputlisting[style=Bash]{6_statistik.sh}
+        \lstinputlisting{6_statistik.sh}
         Es wird einfach für jede Zeile die achte Spalte nach der Trennung
-        "`erster Ordnung"', dem |-Zeichen ausgegeben und von dieser die erste
-        Spalte verarbeitet indem Summe, Summe der Quadrate und Anzahl gespeichert
-        und am Ende dann zu den geforderten Werten verrechnet werden.
+        "`erster Ordnung"', dem \verb'|'-Zeichen ausgegeben und von dieser die
+        erste Spalte verarbeitet indem Summe, Summe der Quadrate und Anzahl
+        gespeichert und am Ende dann zu den geforderten Werten verrechnet
+        werden.
 
         Die Ausgabe dazu:
         \begin{verbatim}
@@ -41,14 +45,10 @@ D4: stddev:  0.205007  avg:  0.830496
         \begin{lstlisting}
 cat CFHTLS.log | awk -F'|' '{ print $10,$8 }' > daten.txt
         \end{lstlisting}
-        Diese können wir dann mit gnuplot plotten und erhalten folgenden
-        wunderschönen Graphen:
-        \begin{figure}[h!]
+        Diese können wir dann mit gnuplot plotten und erhalten den folgenden
+        Graphen:
           \begin{center}
             \includegraphics{grafiken/cfhtls}
           \end{center}
-          \caption{Qualität der Beobachtungen}
-          \label{fig:cfhtls}
-        \end{figure}
     \end{enumerate}
 \end{enumerate}

@@ -2,7 +2,7 @@
 \subsection{Analyse von Pipelines}
 Zu betrachten ist die Pipeline:
 \lstset{language=Bash}
-\begin{lstlisting}[style=Bash]
+\begin{lstlisting}
 cat tr33_emails.txt tr33_emails2.txt | tr '<>' '\n' | grep '@' | sort | uniq -i
 \end{lstlisting}
 \begin{enumerate}
@@ -17,7 +17,7 @@ cat tr33_emails.txt tr33_emails2.txt | tr '<>' '\n' | grep '@' | sort | uniq -i
         (unabh\"angig von Gro\ss{}- und Kleinschreibung) entfernt.
 \end{enumerate}
 
-\begin{lstlisting}[style=Bash]
+\begin{lstlisting}
 find . -type d -exec du -b {} \;| sort -n -r | head -n 10
 \end{lstlisting}
 \begin{enumerate}
@@ -68,9 +68,11 @@ existierender Dateien wird durch deren Zugriffsrechte geregelt. Lesen ist analog
 dazu den Verzeichnisinhalt auszulesen (also letztlich, ob \lstinline'ls'
 funktioniert oder nicht). Das Ausf\"uhrbarkeitsbit regelt, ob auf das
 Verzeichnis zugegriffen werden kann, also ob man in das Verzeichnis mit
-\lstinline'cd' wechseln kann. % Vererbung
+\lstinline'cd' wechseln kann.
 
-\begin{lstlisting}[style=Bash]
+Die gestellte Aufgabe ist wie folgt erledigt (ein paar Zugriffsrechte waren
+allerdings nicht eindeutig in der Aufgabenstellung festgelegt):
+\begin{lstlisting}
 $ ls -ld hausaufgaben{,/*}
 drwxr-xr-- 2 sauer physik131 [...] hausaufgaben
 -rw-r--r-- 1 sauer physik131 [...] hausaufgaben/analysis.txt
@@ -126,23 +128,22 @@ Die Eingabe von obigen bewirkt in den meisten Shells (insbesondere sh (der
 Ur-Shell, nicht der Symlink), (t)csh, zsh und bash) genau nichts. Lediglich in
 der Korn Shell wird (wie die Aufgabe vermutlich gedacht war) die Variable
 überschrieben, so dass nicht mehr auf die Programme in Pfaden wie \verb'/bin'
-oder ähnliches zugegriffen wird. Lediglich die fest in die Shell eingebauten
-Kommandos (bei der bash zum Beispiel \verb'cd', bei Busybox dagegen praktisch
-alles, auch \verb'ls') bleiben implizit ausführbar, also ohne Angabe des
-gesamten Pfades.
+oder ähnliches zugegriffen wird. Nur die fest in die Shell eingebauten Kommandos
+(bei der bash zum Beispiel \verb'cd', bei Busybox dagegen praktisch alles, auch
+\verb'ls') bleiben implizit ausführbar, also ohne Angabe des gesamten Pfades.
 
 
 \subsubsection*{Geben Sie eine Kommandofolge an (Pipes!), mit der Sie eine
 alphabetisch sortierte Liste aller am System angemeldeten Benutzer bekommen.
 Jeder Name soll in Ihrer Liste nur einmal vorkommen.}
-\begin{lstlisting}[style=Bash]
+\begin{lstlisting}
 who | awk '{ print $1 }' | sort | uniq
 \end{lstlisting}
 
 \subsubsection*{Sie wollen die drei größten Dateien in dem Verzeichnisbaum
 startend von Ihrem Homeverzeichnis wissen. Geben Sie eine Befehlsfolge die dies
 leistet}
-\begin{lstlisting}[style=Bash]
+\begin{lstlisting}
 find ~ -type f -exec du {} \; | sort -nr | head -n3
 \end{lstlisting}
 Der \lstinline'find'-Aufruf liefert zunächst eine Liste aller Dateien mit ihren
@@ -153,7 +154,7 @@ zuletzt davon die oberen drei Einträge ausgegeben.
 Homeverzeichnis in einer tar Datei archivieren und mit gzip packen. Die Datei
 soll als Backup in den jeweils anderen CIP-Pool ubertragen werden. Geben Sie die
 nötigen Befehle hierzu.}
-\begin{lstlisting}[style=Bash]
+\begin{lstlisting}
 tar -czpf backup.tar.gz ~
 scp backup.tar.gz cipserv1.astro.uni-bonn.de:
 \end{lstlisting}

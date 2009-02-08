@@ -1,0 +1,44 @@
+\begin{appendix}
+  \section{Graphen zu Aufgabe 3}
+  \label{app:loglog}
+
+  Dabei ist jeweils die x-Achse die Zeit in Tagen und die y-Achse die mittlere
+  Entfernung zum Zentralgestirn.
+
+  \foreach \index/\name in {
+                              1/{der Sonne},
+                              2/{der Erde},
+                              3/{des Mars},
+                              4/{des Jupiter},
+                              5/{des Saturn},
+                              6/{des Uranus},
+                              7/{des Neptun}
+                           }
+  {
+    \subsection*{Satelliten \name}
+      \begin{center}
+        \includegraphics{grafiken/loglog\index}
+      \end{center}
+  }
+
+  \section{Formeln}
+  Da hier auch ein paar mathematische Formeln stehen sollen, sie aber nicht
+  sinnvoll in den Text passen kommen sie nun hierhin:
+  \begin{align}
+      \Delta \lambda = \frac{d}{2 n}
+          \sqrt{
+              \left(\frac{2 y_n}{x^2_0} \Delta y_n\right)^2
+             +\left(\frac{2 y_0}{x^2_0} \Delta y_0\right)^2
+             +\left(\frac{2\left(y^2_n - y^2_0\right)}{x^3_0}\Delta x_0\right)^2}
+  \end{align}
+  \begin{align}
+      U_0 &= -\frac{b}{m} \\
+      \Delta U_0 &= \sqrt{\left|\frac{\Delta b}{m}\right|^2
+                  + \left(\left|\frac{b}{m^2}\right| \Delta m\right)^2}
+  \end{align}
+
+  \begin{align}
+      h = \unit[(5.42 \pm 1.4)\cdot 10^{-34}]{Js}
+      \label{eq:ergebnis}
+  \end{align}
+\end{appendix}
