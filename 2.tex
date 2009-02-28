@@ -6,15 +6,15 @@ Zu betrachten ist die Pipeline:
 cat tr33_emails.txt tr33_emails2.txt | tr '<>' '\n' | grep '@' | sort | uniq -i
 \end{lstlisting}
 \begin{enumerate}
-    \item Im ersten Teil werden die beiden Dateien aneinandergef\"ugt und in die
-        Standardausgabe ausgegeben
-    \item Im zweiten Teil werden alle Gr\"o\ss{}er- und Kleinerzeichen durch
-        Zeilenumbr\"uche (\lstinline'\n') ersetzt
+    \item Im ersten Teil werden die beiden Dateien aneinandergefügt und in die
+      Standardausgabe ausgegeben
+    \item Im zweiten Teil werden alle Größer- und Kleinerzeichen durch
+      Zeilenumbrüche (\lstinline'\n') ersetzt
     \item Daraus werden nun alle Zeilen herausgeholt, die ein @-Zeichen
-        enthalten \ldots
-    \item \ldots, die als n\"achstes sortiert werden.
+      enthalten \ldots
+    \item \ldots, die als nächstes sortiert werden.
     \item Zuletzt werden dann mehrfach vorkommende Zeilen, also Email-Adressen
-        (unabh\"angig von Gro\ss{}- und Kleinschreibung) entfernt.
+      (unabhängig von Groß- und Kleinschreibung) entfernt.
 \end{enumerate}
 
 \begin{lstlisting}
@@ -22,61 +22,59 @@ find . -type d -exec du -b {} \;| sort -n -r | head -n 10
 \end{lstlisting}
 \begin{enumerate}
     \item Das \lstinline'find'-Programm sammelt immer eine Liste von
-        Verzeichniseintr\"agen (hier aus dem aktuellen Verzeichnis) und f\"uhrt
-        bei Angabe des \lstinline'exec'-Parameters auf diesen etwas aus oder gibt sie
-        einfach in die Standardausgabe (explizit mit \lstinline'-print'). Der
-        Parameter \lstinline'-type d' sorgt hier daf\"ur, dass die Liste nur
-        Verzeichnisse (\emph{\textbf{d}irectories}) ent\"alt.
-    \item Jeder einzelne dieser Verzeichniseintr\"age wird dann \lstinline'du'
-        als Parameter \"ubergeben, welches uns dann die Gr\"o\ss{}e des
-        Verzeichnisses und all seiner Untereintr\"age (egal ob Datei oder
-        Verzeichnis) ausgibt (das \lstinline'-b' sorgt daf\"ur, dass die
-        Gr\"o\ss{}e in Bytes angegeben wird, nicht die tats\"achliche
-        Gr\"o\ss{}e auf dem Datentr\"ager). In dieser Form ist der Aufruf
-        ziemlich sinnlos, vermutlich sollte auch der Parameter \lstinline'-s' an
-        \lstinline'du' \"ubergeben werden, der nicht weiter durch den Dateibaum
-        l\"auft (was ja eigentlich \lstinline'find' bereits erledigt).
+      Verzeichniseinträgen (hier aus dem aktuellen Verzeichnis) und führt bei
+      Angabe des \lstinline'exec'-Parameters auf diesen etwas aus oder gibt sie
+      einfach in die Standardausgabe (explizit mit \lstinline'-print'). Der
+      Parameter \lstinline'-type d' sorgt hier dafür, dass die Liste nur
+      Verzeichnisse (\emph{\textbf{d}irectories}) entält.
+    \item Jeder einzelne dieser Verzeichniseinträge wird dann \lstinline'du' als
+      Parameter übergeben, welches uns dann die Größe des Verzeichnisses und all
+      seiner Untereinträge (egal ob Datei oder Verzeichnis) ausgibt (das
+      \lstinline'-b' sorgt dafür, dass die Größe in Bytes angegeben wird, nicht
+      die tatsächliche Größe auf dem Datenträger). In dieser Form ist der Aufruf
+      ziemlich sinnlos, vermutlich sollte auch der Parameter \lstinline'-s' an
+      \lstinline'du' übergeben werden, der nicht weiter durch den Dateibaum
+      läuft (was ja eigentlich \lstinline'find' bereits erledigt).
     \item Die Daten werden dann numerisch (\lstinline'-n') umgekehrt
-        (\lstinline'-r') sortiert. Durch ersteres werden die Zahlen auch als
-        solche aufgefasst, lexikographisch w\"are n\"amlich $100 < 10$,
-        letzteres sorgt daf\"ur, dass die gr\"o\ss{}ten Eintr\"age in der Liste
-        oben stehen.
+      (\lstinline'-r') sortiert. Durch ersteres werden die Zahlen auch als
+      solche aufgefasst, lexikographisch wäre nämlich $100 < 10$, letzteres
+      sorgt dafür, dass die größten Einträge in der Liste oben stehen.
     \item Zuletzt nehmen wir uns von unserem Datensatz die ersten 10 Zeilen, wir
-        erhalten also (mit der vorgeschlagenen \"Anderung) die 10
-        gr\"o\ss{}ten Verzeichniseintr\"age im aktuellen Arbeitsverzeichnis,
-        wobei trivialerweise der erste Eintrag immer \verb'.' ist.
+      erhalten also (mit der vorgeschlagenen Änderung) die 10 größten
+      Verzeichniseinträge im aktuellen Arbeitsverzeichnis, wobei trivialerweise
+      der erste Eintrag immer \verb'.' ist.
 \end{enumerate}
-Sinnvoll w\"aren hier noch der Parameter \lstinline'-S' f\"ur \lstinline'du'.
+Sinnvoll wären hier noch der Parameter \lstinline'-S' für \lstinline'du'.
 
 \subsection{Zugriffsrechte}
 Sieht man komplett von der Existenz von ACLs, Sticky- und Setuid-Bits etc.\ ab,
-so gibt es unter Linux (wie unter allen anderen Unices auch) f\"ur jeden
+so gibt es unter Linux (wie unter allen anderen Unices auch) für jeden
 Verzeichniseintrag die Zugriffsrechte \emph{Lesen} (\textbf Read),
-\emph{Schreiben} (\textbf Write) und \emph{Ausf\"uhren} (e\textbf{X}ecute),
-jeweils einzeln definiert f\"ur den Eigent\"umer (\textbf User), die Gruppe
-(\textbf Group) und alle Anderen (\textbf Others).
+\emph{Schreiben} (\textbf Write) und \emph{Ausführen} (e\textbf{X}ecute),
+jeweils einzeln definiert für den Eigentümer (\textbf User), die Gruppe (\textbf
+Group) und alle Anderen (\textbf Others).
 
-F\"ur Dateien sind die beiden ersten Zugriffsrechte klar, das
-Ausf\"uhrbarkeitsbit regelt, ob eine Shell die Datei (implizit) ausf\"uhren
-kann. Das ist besonders f\"ur Bin\"ardateien relevant, da diese im Gegensatz zu
-Skripten nicht anders ausge\"uhrt werden k\"onnen.
+Für Dateien sind die beiden ersten Zugriffsrechte klar, das Ausführbarkeitsbit
+regelt, ob eine Shell die Datei (implizit) ausführen kann. Das ist besonders für
+Binärdateien relevant, da diese im Gegensatz zu Skripten nicht anders ausgeührt
+werden können.
 
-F\"ur Verzeichnisse regelt Lese- und Schreibbit, ob in das Verzeichnis selber
-geschrieben oder daraus gelesen werden darf. Schreiben hei\ss{}t in diesem Fall
-Dateien oder Verzeichnisse anlegen oder l\"oschen, das ver\"andern bereits
+Für Verzeichnisse regelt Lese- und Schreibbit, ob in das Verzeichnis selber
+geschrieben oder daraus gelesen werden darf. Schreiben heißt in diesem Fall
+Dateien oder Verzeichnisse anlegen oder löschen, das verändern bereits
 existierender Dateien wird durch deren Zugriffsrechte geregelt. Lesen ist analog
 dazu den Verzeichnisinhalt auszulesen (also letztlich, ob \lstinline'ls'
-funktioniert oder nicht). Das Ausf\"uhrbarkeitsbit regelt, ob auf das
-Verzeichnis zugegriffen werden kann, also ob man in das Verzeichnis mit
-\lstinline'cd' wechseln kann.
+funktioniert oder nicht). Das Ausführbarkeitsbit regelt, ob auf das Verzeichnis
+zugegriffen werden kann, also ob man in das Verzeichnis mit \lstinline'cd'
+wechseln kann.
 
 Die gestellte Aufgabe ist wie folgt erledigt (ein paar Zugriffsrechte waren
 allerdings nicht eindeutig in der Aufgabenstellung festgelegt):
 \begin{lstlisting}
 $ ls -ld hausaufgaben{,/*}
-drwxr-xr-- 2 sauer physik131 [...] hausaufgaben
--rw-r--r-- 1 sauer physik131 [...] hausaufgaben/analysis.txt
--rw-r-xr-- 1 sauer physik131 [...] hausaufgaben/getmean
+drwxr-x--- 2 sauer physik131 [...] hausaufgaben
+-rw-r----- 1 sauer physik131 [...] hausaufgaben/analysis.txt
+-rw-r-x--- 1 sauer physik131 [...] hausaufgaben/getmean
 \end{lstlisting}
 
 \subsection{Kontrollfragen}
@@ -90,31 +88,30 @@ Benutzerverzeichnis.
 \subsubsection*{Sie befinden sich im ihrem Homeverzeichnis. Was ist der
 Unterschied zwischen den Befehlen: \lstinline'rm -rf ./uebung/*' und
 \lstinline'rm -rf ./uebung/ *'}
-Ersteres l\"oscht rekursiv alle Verzeichniseintr\"age unterhalb von
-\verb'./uebung', letzteres l\"oscht zus\"atzlich dazu auch noch das Verzeichnis
-selber und alle nicht-versteckten Dateien im aktuellen Verzeichnis.
+Ersteres löscht rekursiv alle Verzeichniseinträge unterhalb von \verb'./uebung',
+letzteres löscht zusätzlich dazu auch noch das Verzeichnis selber und alle
+nicht-versteckten Dateien im aktuellen Verzeichnis.
 
-\subsubsection*{Angenommen der Systemverwalter hat sich einen Spass erlaubt und
-das ls Kommando gel\"oscht. Wie k\"onnen Sie trotzdem eine Liste der Dateien im
-gegenw\"artigen Verzeichnis bekommen?}
+\subsubsection*{Angenommen der Systemverwalter hat sich einen Spaß erlaubt und
+das ls Kommando gelöscht. Wie können Sie trotzdem eine Liste der Dateien im
+gegenwärtigen Verzeichnis bekommen?}
 Zum Beispiel mit \lstinline'find . -mindepth 1 -maxdepth 1'.
 
 \subsubsection*{Sie haben ein Verzeichnis \$\{HOME\}/uebung und befinden sich in
 \$\{HOME\}.  Was geschieht bei folgenden Befehlen: \dots}
 \begin{enumerate}
-    \item Kopiert die Datei \verb'frage.txt' aus dem Verzeichnis
-        \verb'uebung' im Benutzerverzeichnis von \verb'lehnertz' nach
-        \verb'uebung' im eigenen Benutzerverzeichnis. Existiert ein
-        Verzeichnis mit dem Namen, so wird die Datei in diesem abgelegt
-        als \verb'frage.txt', abgelegt, ansonsten wird sie einfach unter
-        dem Namen \verb'uebung' gespeichert.
+    \item Kopiert die Datei \verb'frage.txt' aus dem Verzeichnis \verb'uebung'
+      im Benutzerverzeichnis von \verb'lehnertz' nach \verb'uebung' im eigenen
+      Benutzerverzeichnis. Existiert ein Verzeichnis mit dem Namen, so wird die
+      Datei in diesem abgelegt als \verb'frage.txt', abgelegt, ansonsten wird
+      sie einfach unter dem Namen \verb'uebung' gespeichert.
     \item Dasselbe wie zuvor, allerdings wird hier eine Fehlermeldung
-        ausgegeben, falls \verb'uebung' kein Verzeichnis ist.
-    \item Kopiert alle Dateien aus dem Verzeichnis
-        \verb'~lehnertz/uebung' nach \verb'uebung'. Ist letzteres kein
-        Verzeichnis wird eine Fehlermeldung ausgegeben.
-    \item Dasselbe wie zuvor (m\"oglicherweise mit etwas anders
-        lautender Fehlermeldung, der Effekt ist derselbe).
+      ausgegeben, falls \verb'uebung' kein Verzeichnis ist.
+    \item Kopiert alle Dateien aus dem Verzeichnis \verb'~lehnertz/uebung' nach
+      \verb'uebung'. Ist letzteres kein Verzeichnis wird eine Fehlermeldung
+      ausgegeben.
+    \item Dasselbe wie zuvor (möglicherweise mit etwas anders lautender
+      Fehlermeldung, der Effekt ist derselbe).
 \end{enumerate}
 
 \subsubsection*{Wozu dient die \lstinline'PATH' Variable? Sie geben
@@ -131,7 +128,6 @@ der Korn Shell wird (wie die Aufgabe vermutlich gedacht war) die Variable
 oder ähnliches zugegriffen wird. Nur die fest in die Shell eingebauten Kommandos
 (bei der bash zum Beispiel \verb'cd', bei Busybox dagegen praktisch alles, auch
 \verb'ls') bleiben implizit ausführbar, also ohne Angabe des gesamten Pfades.
-
 
 \subsubsection*{Geben Sie eine Kommandofolge an (Pipes!), mit der Sie eine
 alphabetisch sortierte Liste aller am System angemeldeten Benutzer bekommen.
