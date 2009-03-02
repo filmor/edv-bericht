@@ -56,7 +56,7 @@ Group) und alle Anderen (\textbf Others).
 
 Für Dateien sind die beiden ersten Zugriffsrechte klar, das Ausführbarkeitsbit
 regelt, ob eine Shell die Datei (implizit) ausführen kann. Das ist besonders für
-Binärdateien relevant, da diese im Gegensatz zu Skripten nicht anders ausgeührt
+Binärdateien relevant, da diese im Gegensatz zu Skripten nicht anders ausgeführt
 werden können.
 
 Für Verzeichnisse regelt Lese- und Schreibbit, ob in das Verzeichnis selber
@@ -76,6 +76,10 @@ drwxr-x--- 2 sauer physik131 [...] hausaufgaben
 -rw-r----- 1 sauer physik131 [...] hausaufgaben/analysis.txt
 -rw-r-x--- 1 sauer physik131 [...] hausaufgaben/getmean
 \end{lstlisting}
+Die Löschung der Bits für andere Nutzer ist bei den Dateien \emph{nicht}
+notwendig, da durch das nicht gesetzte Ausführbarkeitsbit im darüberliegenden
+Verzeichnis der \lstinline'open'-Aufruf in C fehlschlägt
+(\lstinline'E_NOACCESS').
 
 \subsection{Kontrollfragen}
 
