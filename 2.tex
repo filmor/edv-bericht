@@ -78,11 +78,16 @@ drwxr-x--- 2 sauer physik131 [...] hausaufgaben
 \end{lstlisting}
 Die Löschung der Bits für andere Nutzer ist bei den Dateien \emph{nicht}
 notwendig, da durch das nicht gesetzte Ausführbarkeitsbit im darüberliegenden
-Verzeichnis der \lstinline'open'-Aufruf in C fehlschlägt
-(\lstinline'E_NOACCESS').
+Verzeichnis der \lstinline'open'-Aufruf in C fehlschlägt:
+\begin{verbatim}
+$ man 2 open
+[...]
+     [EACCES]           Search permission is denied for a component
+                        of the path prefix.
+[...]
+\end{verbatim}
 
 \subsection{Kontrollfragen}
-
 \subsubsection*{Was ist der Unterschied zwischen den Befehlen: \lstinline'cd
 ~lehnertz' und \lstinline'cd ~/lehnertz'}
 Ersteres versucht in das Verzeichnis des Benutzers \verb'lehnertz' zu wechseln,

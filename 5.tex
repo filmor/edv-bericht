@@ -3,9 +3,24 @@
 \lstinputlisting[language=Gnuplot]{5_auswertung.gp}
 
 \subsection*{Ausgabe:}
+Die Werte wurden nachträglich auf drei Stellen gerundet, da \verb'gnuplot' dazu
+scheinbar nicht in der Lage ist.
 \begin{lstlisting}
-  Beschleunigung:  0.896756491435217 0.89940829001619
-  Geschwindigkeit: 2.01427839277124  1.94935661403255
+Beschleunigung:  0.897  0.899
+Fehler dazu:     0.036  0.008
+Geschwindigkeit: 2.014  1.949
+Fehler dazu:     0.379  0.092
 \end{lstlisting}
-Die errechneten Werte passen also sehr gut zusammen.
+Die Ergebnisse sind also für die Beschleunigung
+\begin{align*}
+    a_1 &= \unit[(0.9 \pm 0.04)]{\frac{m}{s^2}} \\
+    a_2 &= \unit[(0.899 \pm 0.008)]{\frac{m}{s^2}}
+\end{align*}
+und für die Geschwindigkeit
+\begin{align*}
+    v_1 &= \unit[(2 \pm 0.4)]{\frac{m}{s}} \\
+    v_2 &= \unit[(1.95 \pm 0.1)]{\frac{m}{s}}
+\end{align*}
+In beiden Fällen überschneiden sich die Fehlerintervalle weit genug, die
+Ergebnisse sind konsistent.
 

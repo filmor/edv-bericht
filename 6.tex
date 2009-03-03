@@ -50,5 +50,17 @@ cat CFHTLS.log | awk -F'|' '{ print $10,$8 }' > daten.txt
           \begin{center}
             \includegraphics{grafiken/cfhtls}
           \end{center}
+        Man sieht bei etwa 2400 Tagen, also etwa im Juli/August des Jahres 2005
+        eine Verringerung der allgemeinen Streuung um die x-Achse, dort wurde also
+        wohl das Instrument ausgetauscht.
+
+        Um das zu verifizieren werden noch Mittelwert und Standardabweichung mit
+        einem ähnlichen Skript wie oben berechnet:
+        \lstinputlisting{6_statistik2.sh}
+        Die Ausgabe dazu:
+        \begin{verbatim}
+Vorher:  avg= -0.0800357  stddev= 0.0259657
+Nachher: avg= -0.0604951  stddev= 0.0411328
+        \end{verbatim}
     \end{enumerate}
 \end{enumerate}

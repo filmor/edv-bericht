@@ -3,9 +3,15 @@
 \usepackage[scale=0.8]{geometry}
 \usepackage[utf8x]{inputenc}
 \usepackage{amsmath, listings, units, pgffor, graphicx}
+\usepackage[usenames, dvipsnames]{color}
+% \usepackage[T1]{fontenc} 
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{8pt}
+
+\makeatletter
+\renewcommand{\verbatim@font}{\ttfamily}
+\makeatother
 
 \lstset
 {
@@ -13,7 +19,11 @@
   showstringspaces=false,
   captionpos=b,
   tabsize=4,
-  breaklines=true
+  breaklines=true,
+  basicstyle=\ttfamily,
+  commentstyle=\color{Blue},
+  stringstyle=\color{Green},
+  keywordstyle=\color{Maroon}
 }
 
 \DeclareMathSymbol{,}{\mathpunct}{letters}{"3B}
@@ -44,6 +54,6 @@
   \Large{Hiermit versichere ich, dass ich den vorliegenden Bericht selbstständig
   angefertigt und nur die angegebenen Hilfsmittel benutzt habe.
 
+  \today
 
-  % Erklärung
 \end{document}
