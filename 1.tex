@@ -30,11 +30,24 @@
   fit \ldots via & Fittet eine Funktion an einen Datensatz an \\
   set logscale   & Setzt eine Achse auf logarithmische Skala \\
   \ldots w errorbars & Aktiviert Fehlerbalken \\
-  \ldots u 1:2   & Wählt die ersten beiden Spalten als Daten aus
+  \ldots u 1:2   & Wählt die ersten beiden Spalten als Daten aus \\
+  f(x) = \ldots  & Definiert eine Funktion \\
+  print \ldots   & Gibt die Auswertung eines Ausdruckes nach stdout (oder der \\
+                 & mit \verb'set output' festgelegten Datei) aus \\
+  set fit errorvariables & Legt fest, dass die Fehler der gefitteten Variablen
+  \\
+                 &  in \verb'variablenname_err' gespeichert werden
 \end{tabular}
 
 \subsection{Maple}
 \begin{tabular}[h!]{cl}
-  
+  [\ldots]       & Definiert eine Liste \\
+  \{\ldots\}     & Definiert eine Menge \\
+  \ldots = \ldots & Definiert eine Gleichung \\
+  solve(\ldots, \{\ldots\}) & Löst eine Gleichung oder ein System von \\
+                 &  Gleichungen in den als zweite Menge übergebenen Variablen \\
+                   diff(f, x)  & Berechnet $\frac{\mathrm df}{\mathrm dx}$ \\
+  int(f, x)     & Berechnet $\int f \,\mathrm dx$ \\
+  plot(f)       & Plottet f
 \end{tabular}
 
